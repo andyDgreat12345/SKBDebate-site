@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env*
+!.env.example
+.dev.vars
+.wrangler/
+.sites-runtime/
+*.log
+*.db
+*.sqlite
+*.bundle

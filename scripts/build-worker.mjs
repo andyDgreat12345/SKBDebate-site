@@ -1,0 +1,10 @@
+import {build} from 'esbuild';
+import fs from 'node:fs';
+await build({entryPoints:['server/worker.ts'],outfile:'dist/server/index.js',bundle:true,format:'esm',platform:'browser',target:'es2022'});
+const manifest=JSON.parse(fs.readFileSync('.openai/hosting.json','utf8'));
+const config={name:'skb-debate-academy',main:'index.js',compatibility_date:'2026-09-01',assets:{directory:'../client',binding:'ASSETS',not_found_handling:'single-page-application',run_worker_first:['/api/*']},d1_databases:[{binding:'DB',database_name:'skb-debate',database_id:'local-skb-db',migrations_dir:'../../drizzle'}]};
+fs.writeFileSync('dist/server/wrangler.json',JSON.stringify(config,null,2));
+fs.mkdirSync('dist/server/drizzle',{recursive:true});
+if(fs.existsSync('drizzle'))fs.cpSync('drizzle','dist/server/drizzle',{recursive:true});
+fs.writeFileSync('wrangler.json',JSON.stringify({...config,main:'dist/server/index.js',assets:{...config.assets,directory:'dist/client'},d1_databases:[{...config.d1_databases[0],migrations_dir:'drizzle'}]},null,2));
+console.log('Worker, client assets, and migrations built. Site:',manifest.project_id);
