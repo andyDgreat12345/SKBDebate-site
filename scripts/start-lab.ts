@@ -11,6 +11,9 @@ const env={LOCAL_DEV:'true',DEEPSEEK_API_KEY:process.env.DEEPSEEK_API_KEY,DEEPSE
 const server=await createServer({configFile:false,plugins:[react(),{name:'local-teaching-api',configureServer(vite){
   vite.middlewares.use(async(req,res,next)=>{
     const path=(req.url||'/').split('?')[0];
+    if(path==='/'||path==='/index.html'){
+      res.statusCode=302;res.setHeader('Location','/lab.html');res.setHeader('Cache-Control','no-store');res.end();return;
+    }
     if(!path.startsWith('/api/'))return next();
     const send=(status:number,error:string)=>{res.statusCode=status;res.setHeader('Content-Type','application/json');res.end(JSON.stringify({error}));};
     if(path!=='/api/tutor')return send(404,'Only the teaching tutor API is available in this workspace.');
