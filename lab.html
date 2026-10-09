@@ -1,1 +1,17 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>SKB · Teaching lab</title><link rel="icon" href="/favicon.svg"/></head><body><div id="root"></div><script type="module" src="/app/TeachingLab.tsx"></script></body></html>
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>SKB · Teaching lab</title></head><body>
+<div id="boot-status" role="status" style="max-width:650px;margin:50px auto;padding:24px;font:17px/1.6 system-ui;color:#233c3a;background:#f5f3ec">
+<strong>SKB Teaching Lab</strong><p id="boot-message">Loading the interactive lesson…</p>
+<noscript>This lesson requires JavaScript to be enabled in Safari.</noscript>
+</div>
+<script>
+(function(){
+  var ready=false;
+  function failed(){if(!ready)document.getElementById('boot-message').textContent='The page opened, but the lesson could not start. Reload once. If this message remains, send a screenshot of it to the project owner. Your API key is not needed to display this lesson.';}
+  window.addEventListener('skb:ready',function(){ready=true;document.getElementById('boot-status').hidden=true;});
+  window.addEventListener('error',failed);
+  window.addEventListener('unhandledrejection',failed);
+  setTimeout(failed,15000);
+})();
+</script>
+<div id="root"></div><script type="module" src="/app/TeachingLab.tsx"></script></body></html>

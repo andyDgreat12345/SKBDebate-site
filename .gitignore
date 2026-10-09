@@ -9,3 +9,5 @@ dist/
 *.db
 *.sqlite
 *.bundle
+
+.lab-dist/

@@ -1,4 +1,4 @@
-import {createServer} from 'vite';
+import {build,preview} from 'vite';
 import react from '@vitejs/plugin-react';
 import {tutorRoute} from '../server/tutor';
 
@@ -8,7 +8,9 @@ const cloudHost=codespace?`${codespace}-5173.${domain}`:undefined;
 const origins=new Set(['http://localhost:5173','http://127.0.0.1:5173',...(cloudHost?[`https://${cloudHost}`]:[])]);
 // Only whitelisted server values are passed to the adapter. Never write the secret to disk.
 const env={LOCAL_DEV:'true',DEEPSEEK_API_KEY:process.env.DEEPSEEK_API_KEY,DEEPSEEK_MODEL:process.env.DEEPSEEK_MODEL||'deepseek-flash'};
-const server=await createServer({configFile:false,plugins:[react(),{name:'local-teaching-api',configureServer(vite){
+console.log('Building the browser preview…');
+await build({configFile:false,plugins:[react()],build:{outDir:'.lab-dist',target:'safari15',rollupOptions:{input:'lab.html'},copyPublicDir:false}});
+const server=await preview({configFile:false,build:{outDir:'.lab-dist'},plugins:[{name:'local-teaching-api',configurePreviewServer(vite){
   vite.middlewares.use(async(req,res,next)=>{
     const path=(req.url||'/').split('?')[0];
     if(path==='/'||path==='/index.html'){
@@ -28,8 +30,7 @@ const server=await createServer({configFile:false,plugins:[react(),{name:'local-
       res.statusCode=response.status;response.headers.forEach((value,key)=>res.setHeader(key,value));res.end(await response.text());
     }catch{if(!res.destroyed)send(503,'Tutor unavailable. Please try again.');}
   });
-}}],server:{host:'127.0.0.1',port:5173,strictPort:true,allowedHosts:cloudHost?[cloudHost]:[]}});
-await server.listen();
+}}],preview:{host:'0.0.0.0',port:5173,strictPort:true,allowedHosts:cloudHost?[cloudHost]:[]}});
 console.log(`Teaching Lab: ${cloudHost?`https://${cloudHost}`:'http://127.0.0.1:5173'}/lab.html`);
 console.log(env.DEEPSEEK_API_KEY?'DeepSeek key is present. Submit one question to test it.':'DeepSeek key is missing. Add the Codespaces secret and restart the Codespace.');
 console.log('Keep the forwarded port Private. This is a development experiment, not a public hosting server.');

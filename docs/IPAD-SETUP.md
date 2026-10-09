@@ -13,3 +13,9 @@ The launcher reads the secret directly from the server environment. No key file,
 The private forwarding gateway provides access control; the development server is not safe to expose as a public product. Only the tutor endpoint is available through this launcher. Existing platform database APIs are intentionally unavailable. Questions and recent conversation are sent to DeepSeek on submission. There are no automatic paid model calls at startup.
 
 The new launcher does not use `.dev.vars`; that file belongs to the older Wrangler workflow. To use the new launcher locally, supply the same variables through your local secret manager or environment.
+
+## Updating an existing Codespace
+
+Open its terminal and run `git pull --ff-only`. Stop and restart that Codespace from github.com/codespaces; the startup command then builds and serves the new version. Refresh the preview after the build completes. Refreshing Safari alone does not update the server checkout.
+
+The launcher now serves a compiled bundle targeted at Safari 15 or newer, rather than a development module server. Root opens `/lab.html`. If the HTML reaches the browser but scripts fail, a startup message remains visible with troubleshooting guidance. Actual iPad Safari and the GitHub private tunnel must still be checked on the user device; local Chromium checks do not establish remote availability.

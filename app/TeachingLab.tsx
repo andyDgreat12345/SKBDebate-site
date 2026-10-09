@@ -6,6 +6,7 @@ import LiveTutor from './LiveTutor';
 import {originalMap,type TutorReply} from '../shared/tutor';
 
 function TeachingLab(){
+  useEffect(()=>{window.dispatchEvent(new Event('skb:ready'));},[]);
   const [state,dispatch]=useReducer(teachingReducer,initialTeachingState);
   const [help,setHelp]=useState<string|null>(null);
   const [selected,setSelected]=useState<string|null>(null);
