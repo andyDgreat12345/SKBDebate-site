@@ -1,0 +1,31 @@
+import {chromium} from '/opt/codex/runtimes/cua/lib/node_modules/playwright/index.mjs';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+try{
+  const page=await browser.newPage({viewport:{width:1440,height:1100}});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:5173/lab.html');
+  await page.getByRole('button',{name:'Play lesson',exact:true}).click();
+  await page.getByRole('button',{name:'Could the assumption be different?'}).click();
+  await page.getByRole('button',{name:'Play lesson',exact:true}).waitFor();
+  assert.ok(await page.locator('.coach-answer').textContent().then(t=>t.includes('An argument map is an interpretation')));
+  assert.ok(await page.locator('.argument-node.focused').textContent().then(t=>t.includes('Unstated assumption')));
+  await page.getByRole('button',{name:'Return to lesson'}).click();
+  await page.getByRole('button',{name:'Pause lesson',exact:true}).click();
+  await page.getByRole('button',{name:'Next',exact:true}).click();
+  assert.equal(await page.locator('[aria-current="step"]').textContent(),'02Reveal the missing step');
+  await page.getByLabel('Your first response').fill('One responsible user does not settle the policy comparison.');
+  await page.getByRole('button',{name:'“My friend uses a phone responsibly.”',exact:true}).click();
+  assert.equal(await page.getByLabel('Your revised response').count(),0);
+  await page.getByRole('button',{name:'“Why would an all-day restriction work better than classroom rules?”',exact:true}).click();
+  await page.getByLabel('Your revised response').fill('What comparison supports an all-day restriction over classroom rules?');
+  const download=page.waitForEvent('download');await page.getByRole('button',{name:'Download reflection'}).click();
+  const file=await download;const stream=await file.createReadStream();let raw='';for await(const chunk of stream)raw+=chunk;
+  const data=JSON.parse(raw);assert.equal(data.feedbackType,'prepared');assert.ok(data.revision.includes('classroom rules'));assert.equal(data.lessonVersion,1);
+  await page.screenshot({path:'/workspace/scratch/teaching-lab-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
+  await page.screenshot({path:'/workspace/scratch/teaching-lab-mobile.png',fullPage:true});
+  await page.reload();assert.equal(await page.getByLabel('Your first response').inputValue(),'');
+  assert.deepEqual(errors,[]);console.log('PASS: pause/resume, diagram focus, chapters, targeted feedback, revision export, mobile layout, tab-only state.');
+}finally{await browser.close();}
