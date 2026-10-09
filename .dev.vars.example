@@ -1,0 +1,5 @@
+# Append these values to your ignored .dev.vars file; never commit real keys.
+LOCAL_DEV=true
+DEEPSEEK_API_KEY=
+# Use a model ID currently available to your DeepSeek account.
+DEEPSEEK_MODEL=

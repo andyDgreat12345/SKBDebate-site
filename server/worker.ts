@@ -1,7 +1,8 @@
 import {z} from 'zod';
 import {LESSONS} from '../shared/courses';
 import {RESOURCES} from '../shared/resources';
-type Env={DB:D1Database;ASSETS:Fetcher;ADMIN_EMAILS?:string;LOCAL_DEV?:string};
+import {tutorRoute,type TutorEnv} from './tutor';
+type Env=TutorEnv&{DB:D1Database;ASSETS:Fetcher;ADMIN_EMAILS?:string};
 const json=(data:unknown,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 const str=(max:number)=>z.string().trim().min(1).max(max);
 const docSchema=z.object({id:z.string().uuid(),kind:z.enum(['round','case','speech']),title:str(500),data:z.record(z.string(),z.unknown()),version:z.number().int().nonnegative()});
@@ -9,6 +10,7 @@ const submissionSchema=z.object({title:str(160),format:str(50),kind:z.enum(['Gui
 function identity(request:Request,env:Env){const url=new URL(request.url);const local=env.LOCAL_DEV==='true'&&['127.0.0.1','localhost'].includes(url.hostname);const id=local?'local-founder':request.headers.get('oai-authenticated-user-id');if(!id)return null;const email=local?'local@skb.test':request.headers.get('oai-authenticated-user-email')||'';let name=request.headers.get('oai-authenticated-user-full-name')||'';if(request.headers.get('oai-authenticated-user-full-name-encoding')==='percent-encoded-utf-8'){try{name=decodeURIComponent(name)}catch{name=''}}return {id,email,name:name||'SKB learner',admin:local||(env.ADMIN_EMAILS||'').toLowerCase().split(',').map(x=>x.trim()).filter(Boolean).includes(email.toLowerCase())}}
 async function body(req:Request){if(Number(req.headers.get('content-length')||0)>200000)throw new Error('Payload too large');const s=await req.text();if(s.length>200000)throw new Error('Payload too large');return JSON.parse(s)}
 async function api(request:Request,env:Env){const url=new URL(request.url),path=url.pathname,method=request.method,user=identity(request,env);if(method!=='GET'){const origin=request.headers.get('origin');if(origin&&origin!==url.origin)return json({error:'Cross-origin writes are not allowed.'},403);if(request.headers.get('sec-fetch-site')==='cross-site')return json({error:'Cross-site writes are not allowed.'},403);if(!request.headers.get('content-type')?.startsWith('application/json'))return json({error:'Use a JSON request.'},415)}
+if(path==='/api/tutor')return tutorRoute(request,env);
 if(path==='/api/health')return json({ok:true,version:'0.1.0'});
 if(path==='/api/me'&&method==='GET'){let profile=null;if(user)profile=await env.DB.prepare('SELECT name,role,bio FROM profiles WHERE id=?').bind(user.id).first();return json({user:user?{...user,...profile}:null,aiCoach:false})}
 if(path==='/api/catalog'&&method==='GET'){const rows=await env.DB.prepare("SELECT id,author,title,format,kind,description,url,body,created_at FROM submissions WHERE status='approved' ORDER BY created_at DESC LIMIT 200").all();return json({lessons:LESSONS,resources:[...RESOURCES.map(x=>({...x,author:'SKB editorial',official:true})),...rows.results]})}

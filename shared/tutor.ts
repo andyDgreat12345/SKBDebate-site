@@ -1,0 +1,10 @@
+import {z} from 'zod';
+import {lesson} from './teaching';
+const text=(max:number)=>z.string().trim().min(1).max(max);
+export const nodeId=z.enum(['observation','assumption','conclusion']);
+export const mapSchema=z.object({observation:text(500),assumption:text(500),conclusion:text(500)}).strict();
+export type ArgumentMap=z.infer<typeof mapSchema>;
+export const originalMap:ArgumentMap={observation:lesson.nodes[0].text,assumption:lesson.nodes[1].text,conclusion:lesson.nodes[2].text};
+export const tutorReplySchema=z.object({explanation:text(2400),map:mapSchema,focus:nodeId,followUp:text(500)}).strict();
+export type TutorReply=z.infer<typeof tutorReplySchema>;
+export const tutorRequestSchema=z.object({lessonId:z.literal(lesson.id),lessonVersion:z.literal(lesson.version),chapter:z.number().int().min(0).max(lesson.scenes.length-1),question:text(1200),map:mapSchema,history:z.array(z.object({role:z.enum(['user','assistant']),content:text(3500)}).strict()).max(6)}).strict();
