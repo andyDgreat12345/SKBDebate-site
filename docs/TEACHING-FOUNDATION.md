@@ -40,3 +40,7 @@ Implemented live tutor boundary (source references remain future work): send les
 5. Only then choose between richer authored animation, one bounded live question endpoint, or simulator integration.
 
 No accounts, payments, continuous voice, automatic scores, new courses, or public deployment are part of this experiment. Recover and evaluate the original simulator separately before integrating it.
+
+## Learning journey milestone (2026-10-10)
+
+The lab now opens on Learn, with an optional first attempt before the lesson. My Progress contains an independent transfer exercise, self-review, and a combined downloadable record. See [BUILD-PROGRESS.md](BUILD-PROGRESS.md) for the inventory, teaching specification, limitations, and next milestones. Session-only storage and the local tutor boundary remain unchanged.

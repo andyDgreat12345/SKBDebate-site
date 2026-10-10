@@ -5,6 +5,7 @@ try{
   const page=await browser.newPage({viewport:{width:1440,height:1100}});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:5173/lab.html');
+  await page.getByRole('button',{name:'Lesson',exact:true}).click();
   await page.getByRole('button',{name:'Play lesson',exact:true}).click();
   await page.getByRole('button',{name:'Could the assumption be different?'}).click();
   await page.getByRole('button',{name:'Play lesson',exact:true}).waitFor();
@@ -26,6 +27,6 @@ try{
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
   await page.screenshot({path:'/workspace/scratch/teaching-lab-mobile.png',fullPage:true});
-  await page.reload();assert.equal(await page.getByLabel('Your first response').inputValue(),'');
+  await page.reload();await page.getByRole('button',{name:'Lesson',exact:true}).click();assert.equal(await page.getByLabel('Your first response').inputValue(),'');
   assert.deepEqual(errors,[]);console.log('PASS: pause/resume, diagram focus, chapters, targeted feedback, revision export, mobile layout, tab-only state.');
 }finally{await browser.close();}
