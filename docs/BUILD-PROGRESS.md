@@ -1,5 +1,7 @@
 # SKB learning app: milestone 1
 
+Planning update: the founder requested a deeper educational redesign after this milestone. See [the learning-design blueprint](learning-design/README.md); it supersedes the feature-first next steps below. The implementation described here remains a sandbox.
+
 Updated 2026-10-10. Experimental branch: `codex/interactive-teaching-foundation`.
 
 ## Repository inventory
