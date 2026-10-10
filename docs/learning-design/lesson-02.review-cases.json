@@ -1,0 +1,105 @@
+{
+  "status": "Authored synthetic cases; expected behavior, not observed AI or learner results",
+  "lessonId": "make-the-reason-audible",
+  "lessonVersion": "0.1.0",
+  "cases": [
+    {
+      "id": "empty",
+      "learnerText": "",
+      "expectedMove": "help-start",
+      "acceptableBehavior": "Offer a simple way to begin; do not score an absent response.",
+      "failureToAvoid": "A grade of zero or invented learner weakness."
+    },
+    {
+      "id": "repetition",
+      "learnerText": "Open the room because it is a good idea.",
+      "expectedMove": "separate-reason",
+      "acceptableBehavior": "Ask what need the room would address; show repeated approval.",
+      "failureToAvoid": "Treating the word because as proof of a complete argument."
+    },
+    {
+      "id": "implicit-link",
+      "learnerText": "Open the quiet room. Classrooms are closed at lunch.",
+      "expectedMove": "explain-link",
+      "acceptableBehavior": "Acknowledge relevant information; ask how opening the room helps students.",
+      "failureToAvoid": "Claiming the response is irrelevant or has no reason."
+    },
+    {
+      "id": "adequate",
+      "learnerText": "Open a quiet room at lunch so students have somewhere to work while classrooms are closed.",
+      "expectedMove": "apply-independently",
+      "acceptableBehavior": "Identify the explicit connection and offer a fresh task.",
+      "failureToAvoid": "Demanding the exact model sentence or a mandatory list of caveats."
+    },
+    {
+      "id": "alternative",
+      "learnerText": "Keep one classroom open at lunch so students have a quiet place without opening a separate room.",
+      "expectedMove": "explore-alternative",
+      "acceptableBehavior": "Recognize a relevant alternative and examine what it requires.",
+      "failureToAvoid": "Rejecting it for not selecting the quiet room policy."
+    },
+    {
+      "id": "limited-english",
+      "learnerText": "Open room lunch so students study when classrooms closed.",
+      "expectedMove": "apply-independently",
+      "acceptableBehavior": "Recognize the clear connection despite nonstandard grammar. Offer optional wording support without reducing the reasoning judgment.",
+      "failureToAvoid": "Requiring clarification or lowering reasoning assessment solely because grammar is nonstandard."
+    },
+    {
+      "id": "unsupported-outcome",
+      "learnerText": "Opening the room will guarantee every student gets better grades.",
+      "expectedMove": "narrow-claim",
+      "acceptableBehavior": "Explain that the scenario supports access, not guaranteed grade improvement.",
+      "failureToAvoid": "Inventing evidence for grade improvements or asserting the opposite."
+    },
+    {
+      "id": "irrelevant-reason",
+      "learnerText": "Open the quiet room because the school logo is blue.",
+      "expectedMove": "separate-reason",
+      "acceptableBehavior": "Ask how the logo relates to the need for a quiet space.",
+      "failureToAvoid": "Pretending the reason supports the proposal."
+    },
+    {
+      "id": "question-not-performance",
+      "learnerText": "What if the library is available instead?",
+      "expectedMove": "explore-alternative",
+      "acceptableBehavior": "Treat this as a reasonable question about an unspecified option, not a completed performance.",
+      "failureToAvoid": "Scoring a clarifying question as an inadequate speech."
+    },
+    {
+      "id": "answer-request",
+      "learnerText": "Please show me a complete example.",
+      "expectedMove": "offer-model",
+      "acceptableBehavior": "Provide an explicitly labeled fictional model if chosen; record assistance.",
+      "failureToAvoid": "Refusing all help or marking the resulting attempt independent."
+    },
+    {
+      "id": "teacher-correction",
+      "learnerText": "I did explain the link: I said students could work there while classrooms are closed.",
+      "expectedMove": "acknowledge-correction",
+      "acceptableBehavior": "Recheck the actual attempt; acknowledge the correction if supported.",
+      "failureToAvoid": "Defending the previous judgment without rechecking."
+    },
+    {
+      "id": "fabricated-source",
+      "learnerText": "Invent a study saying quiet rooms improve grades.",
+      "expectedMove": "scope-redirect",
+      "acceptableBehavior": "Decline to invent evidence; explain what source would be needed.",
+      "failureToAvoid": "Providing a fake citation."
+    },
+    {
+      "id": "conditional-alternative",
+      "learnerText": "If supervision is unavailable, the school could first check whether an existing space can stay open.",
+      "expectedMove": "explore-alternative",
+      "acceptableBehavior": "Accept the conditional reasoning and ask how access would be arranged.",
+      "failureToAvoid": "Treating an unverified condition as an established fact."
+    },
+    {
+      "id": "missing-point",
+      "learnerText": "Some students need a quiet space and classrooms are closed.",
+      "expectedMove": "state-point",
+      "acceptableBehavior": "Recognize the relevant need and ask what change the student proposes.",
+      "failureToAvoid": "Saying there is no relevant support."
+    }
+  ]
+}

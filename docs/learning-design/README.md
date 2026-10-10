@@ -14,6 +14,10 @@ The educational promise: **prepare a short, understandable contribution; give re
 
 This common foundation serves public speaking and debate. It does not claim to train every competitive event: interpretation, performance, PF, LD, policy, and World Schools need later event-specific teaching and qualified review.
 
+## Resolved system design
+
+Read [SYSTEM.md](SYSTEM.md) for the teaching decisions, learner progression, feedback policy, and release boundary. The [structured lesson package](lesson-02.package.json) and [synthetic review cases](lesson-02.review-cases.json) make these decisions concrete. See [DESIGN-REVIEW.md](DESIGN-REVIEW.md) for the internal consistency review and remaining validation. These files are design inputs, not deployed functionality.
+
 ## Read the concrete plans
 
 1. [Sources and adaptation decisions](SOURCES.md): actual courses to study, open resources to assess, rights workflow, and what was verified.

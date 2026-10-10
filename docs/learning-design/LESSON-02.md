@@ -69,7 +69,9 @@ Prompts A and B are proposed parallel tasks, not validated equivalent assessment
 | Main point | No identifiable proposal | Proposal discernible but vague | Listener can state the proposal accurately |
 | Support | Repetition or unrelated statement | Relevant reason with missing detail | Relevant reason grounded in the stated scenario |
 | Connection | No explanation of relevance | Connection implied or ambiguous | Explains how the reason supports the proposal |
-| Qualification | Invents certainty/evidence | Some overstatement or unclear limits | Stays within the scenario and allows unresolved questions |
+| Scope | Invents evidence or unsupported certainty | Meaning or extent needs clarification | Stays within the scenario without unsupported claims |
+
+A beginner does not have to list every limitation to meet the scope criterion. Clear reasoning in nonstandard English can satisfy the same criterion as polished English.
 
 Keep delivery observations separate: can the listener follow the structure; where would a pause or signpost help? Do not award a delivery score from text or use accent as a proxy for clarity. The rubric describes this task; it is not a validated measure of general critical thinking.
 

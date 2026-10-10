@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "id": "make-the-reason-audible",
+  "version": "0.1.0",
+  "status": "draft",
+  "language": "en",
+  "audience": "Beginners across speech and debate formats",
+  "objective": "State a proposal, give a relevant reason, and explain how the reason supports the proposal.",
+  "prerequisites": [
+    "state-a-main-point"
+  ],
+  "notAssessed": [
+    "agreement with a policy",
+    "accent",
+    "personality",
+    "oral delivery from text",
+    "general philosophical ability"
+  ],
+  "sourceStatus": "Original script and fictional scenarios; no third-party media included. See SOURCES.md for research references.",
+  "humanReview": {
+    "founder": "pending",
+    "educator": "pending",
+    "learnerTrial": "pending"
+  },
+  "tasks": [
+    {
+      "id": "waiting-space",
+      "role": "initial",
+      "fictional": true,
+      "prompt": "Students waiting for an after-school bus have nowhere to sit. Propose one small change. Explain one reason for it and how that reason supports your change.",
+      "targetSeconds": [
+        30,
+        45
+      ]
+    },
+    {
+      "id": "quiet-room",
+      "role": "guided",
+      "fictional": true,
+      "prompt": "Students who need a quiet place cannot use classrooms at lunch. Propose a response and explain how it could address this need.",
+      "targetSeconds": [
+        30,
+        45
+      ]
+    },
+    {
+      "id": "water-access",
+      "role": "independent",
+      "fictional": true,
+      "prompt": "Students finishing physical education have a long walk to the nearest drinking-water refill point. Propose one small change. Explain one reason for it and how that reason supports your change.",
+      "targetSeconds": [
+        30,
+        45
+      ]
+    },
+    {
+      "id": "activity-directions",
+      "role": "delayed",
+      "fictional": true,
+      "prompt": "New students want to join school activities but cannot find where the meetings happen. Propose one small change. Explain one reason for it and how that reason supports your change.",
+      "targetSeconds": [
+        30,
+        45
+      ]
+    }
+  ],
+  "sceneObjects": [
+    "proposal",
+    "repeated-approval",
+    "need",
+    "connection",
+    "open-questions"
+  ],
+  "scenes": [
+    {
+      "id": "proposal-needs-support",
+      "objectIds": [
+        "proposal"
+      ],
+      "narration": "Imagine someone says our school should open a quiet room during lunch. You understand the proposal, but you may still ask why the school should do it. A clear speaker helps the listener follow that next step.",
+      "motion": "Reveal the proposal, then the listener question: Why?",
+      "checkpointId": null,
+      "checkpointTiming": null
+    },
+    {
+      "id": "repetition",
+      "objectIds": [
+        "proposal",
+        "repeated-approval"
+      ],
+      "narration": "Saying it is a good idea repeats our approval. It does not tell the listener what need the room would meet. We need a reason that adds something the listener can examine.",
+      "motion": "Align the repeated meanings while retaining both labels.",
+      "checkpointId": "separate-reason",
+      "checkpointTiming": "after-narration"
+    },
+    {
+      "id": "a-reason",
+      "objectIds": [
+        "proposal",
+        "need"
+      ],
+      "narration": "Here is an invented detail: students who need somewhere quiet cannot use the classrooms at lunch. That gives us a possible reason. How would opening this room address the need?",
+      "motion": "Reveal the fictional need and a gap before the proposal.",
+      "checkpointId": null,
+      "checkpointTiming": null
+    },
+    {
+      "id": "the-connection",
+      "objectIds": [
+        "proposal",
+        "need",
+        "connection",
+        "open-questions"
+      ],
+      "narration": "The room would give those students a place to work during the time classrooms are unavailable. The connection is clearer now. Staffing, access, and other options still need consideration.",
+      "motion": "Reveal the connection after the learner attempt; retain unresolved questions.",
+      "checkpointId": "explain-connection",
+      "checkpointTiming": "before-narration"
+    },
+    {
+      "id": "listen-and-revise",
+      "objectIds": [
+        "proposal",
+        "need",
+        "connection"
+      ],
+      "narration": "State your proposal, give one reason, and explain the connection. Ask a listener what they understood. Revise a part that was unclear.",
+      "motion": "Highlight each part in spoken order; return to learner work.",
+      "checkpointId": null,
+      "checkpointTiming": null
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "separate-reason",
+      "prompt": "Does saying the quiet room is a good idea add a separate reason? Explain your answer.",
+      "acceptsFreeText": true,
+      "modelGuidance": "Approval alone does not explain the need. A response may reasonably explain a relevant need in its own words.",
+      "gatesRevision": false
+    },
+    {
+      "id": "explain-connection",
+      "prompt": "How could the proposed room address the lack of available classrooms at lunch?",
+      "acceptsFreeText": true,
+      "modelGuidance": "Explain access to a quiet place during the unavailable period. Accept justified alternatives and requests for clarification. Do not infer improved grades from this scenario.",
+      "gatesRevision": false
+    }
+  ],
+  "rubric": [
+    {
+      "id": "main-point",
+      "levels": {
+        "0": "No identifiable proposal",
+        "1": "Proposal discernible but vague",
+        "2": "Listener can state the proposal accurately"
+      }
+    },
+    {
+      "id": "relevant-support",
+      "levels": {
+        "0": "Repetition or unrelated support",
+        "1": "Relevant reason with unclear detail",
+        "2": "Relevant reason grounded in the scenario"
+      }
+    },
+    {
+      "id": "explained-connection",
+      "levels": {
+        "0": "No explanation of relevance",
+        "1": "Connection is implied or ambiguous",
+        "2": "Explains how the reason supports the proposal"
+      }
+    },
+    {
+      "id": "scope",
+      "levels": {
+        "0": "Invents evidence or unsupported certainty",
+        "1": "Meaning or extent of claim needs clarification",
+        "2": "Stays within the scenario without unsupported claims"
+      }
+    }
+  ],
+  "coaching": {
+    "maxUnproductiveTurnsBeforeModelOffer": 2,
+    "moves": [
+      "help-start",
+      "clarify",
+      "narrow-claim",
+      "state-point",
+      "separate-reason",
+      "explain-link",
+      "explore-alternative",
+      "apply-independently",
+      "offer-model",
+      "acknowledge-correction",
+      "scope-redirect"
+    ],
+    "allowedVisualActions": [
+      "none",
+      "highlight",
+      "show-authored-comparison",
+      "annotate"
+    ],
+    "responseContract": {
+      "move": "one allowed move",
+      "observation": "specific to the learner response; no invented praise",
+      "evidenceQuote": "exact excerpt when interpreting submitted work; empty for no attempt",
+      "explanation": "one focused explanation",
+      "nextAction": "one feasible learner action",
+      "visualAction": "allowed action and existing object ID or none",
+      "needsClarification": "boolean"
+    },
+    "prohibited": [
+      "invented research",
+      "permanent mastery assignment",
+      "arbitrary executable scene code",
+      "penalty for a defensible alternative",
+      "oral delivery judgment from text"
+    ],
+    "fallback": "Use prepared explanation and preserve the learner attempt; offer retry or human review.",
+    "requestKinds": [
+      "instruction-question",
+      "feedback-on-attempt",
+      "request-model",
+      "dispute-feedback"
+    ],
+    "routingRule": "First identify the request kind. A question about the scenario is not itself a submitted performance to grade."
+  },
+  "attemptRecord": {
+    "requiredFields": [
+      "taskId",
+      "lessonVersion",
+      "createdAt",
+      "response",
+      "performanceMode",
+      "priorTaskExposure",
+      "assistanceEvents",
+      "reviewerType"
+    ],
+    "performanceModes": [
+      "written",
+      "spoken-live",
+      "spoken-recorded"
+    ],
+    "assistanceKinds": [
+      "hint",
+      "model-answer",
+      "ai-explanation",
+      "human-coaching"
+    ],
+    "reviewerTypes": [
+      "none",
+      "self",
+      "peer",
+      "educator",
+      "ai-provisional"
+    ],
+    "independenceRule": "Only a fresh task with no answer-generating assistance can be labeled unassisted. A task role alone never establishes independence.",
+    "oralEvidenceRule": "Written work does not establish spoken performance. A self-reported rehearsal is not listener-observed evidence.",
+    "storageRule": "Immutable submitted snapshots; revisions create new records. Authenticated durable records use D1.",
+    "integrityRule": "The server derives exposure and assistance from recorded events. Do not trust a learner client or model to assign unassisted status."
+  },
+  "accessibility": [
+    "full transcript",
+    "captions",
+    "static sequence equivalent",
+    "touch and keyboard controls",
+    "no mandatory recording",
+    "plain-language vocabulary support"
+  ],
+  "releaseGates": [
+    "founder review",
+    "educator review",
+    "small learner trial",
+    "content and media rights checks",
+    "actual iPad playback test",
+    "auth and save checks before external saved use",
+    "AI review-case evaluation before external generative feedback"
+  ]
+}
